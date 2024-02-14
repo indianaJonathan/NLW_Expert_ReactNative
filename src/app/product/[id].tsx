@@ -1,30 +1,37 @@
-import { View, Text, Image, TextInput } from 'react-native'
+import { View, Text, Image } from 'react-native'
 
 import { Feather } from '@expo/vector-icons'
 import { useLocalSearchParams, useNavigation, Redirect } from 'expo-router'
 
-import { useCartStore } from '@/stores/cart-store';
+import { ProductCartProps, useCartStore } from '@/stores/cart-store';
 
 import { Button } from '@/components/button';
 
 import { PRODUCTS } from '@/utils/data/products';
 import { formatCurrency } from '@/utils/functions/formatCurrency';
 import { LinkButton } from '@/components/link-button';
-import { Input } from '@/components/input';
+import { QuantitySelect } from '@/components/quantity-select';
+import { useState } from 'react';
 
 export default function Product () {
     const cartStore = useCartStore();
     const navigation = useNavigation();
-
     const { id } = useLocalSearchParams();
+
+    const [quantity, setQuantity] = useState(1);
 
     const product = PRODUCTS.find((prod) => prod.id === id);
 
     function handleAddToCart() {
         if (product) {
-            cartStore.add(product);
+            const newProduct: ProductCartProps = {...product, quantity}
+            cartStore.add(newProduct);
             navigation.goBack();
         }
+    }
+
+    function handleQuantityChange(selectedQuantity: number) {
+        setQuantity(selectedQuantity);
     }
 
     if (!product) {
@@ -60,6 +67,7 @@ export default function Product () {
                         {"\u2022"} { ingredient }
                     </Text>
                 )) }
+                <QuantitySelect label="Quantidade:" initialValue={1} incrAmount="integer" onChange={handleQuantityChange}/>
             </View>
             <View className="p-5 pb-8 gap-5">
                 <Button onPress={handleAddToCart}>

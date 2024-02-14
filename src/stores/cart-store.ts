@@ -8,12 +8,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import * as cartInMemory from './helpers/cart-in-memory'
 
 export type ProductCartProps = ProductProps & {
-    quantity: number;
+    quantity?: number;
 }
 
 type StateProps = {
     products: ProductCartProps[];
-    add: (product: ProductProps) => void;
+    add: (product: ProductCartProps) => void;
     remove: (productId: string) => void;
     clear: () => void;
 }
@@ -21,7 +21,7 @@ type StateProps = {
 export const useCartStore = create(
     persist<StateProps>((set) => ({
     products: [],
-    add: (product: ProductProps) => 
+    add: (product: ProductCartProps) => 
         set((state) => ({
             products: cartInMemory.add(state.products, product)
         })),
