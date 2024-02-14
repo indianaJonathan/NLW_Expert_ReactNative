@@ -17,7 +17,7 @@ export default function Home() {
 
     const sectionListRef = useRef<SectionList<ProductProps>>(null);
 
-    const cartQuantityItems = cartStore.products.reduce((total, product) => total + product.quantity, 0);
+    const cartQuantityItems = cartStore.products.reduce((total, product) => total + (product.quantity ? product.quantity : 1), 0);
 
     function handleCategorySelect(selectedCategory: string) {
         setCategory(selectedCategory);
@@ -35,7 +35,7 @@ export default function Home() {
 
     return (
         <View className="pt-8">
-            <Header title="Cardápio" cartQuantityItems={cartQuantityItems}/>
+            <Header title="Cardápio" icon="home" cartQuantityItems={cartQuantityItems}/>
             <FlatList 
                 data={CATEGORIES}
                 keyExtractor={ (item) => item }

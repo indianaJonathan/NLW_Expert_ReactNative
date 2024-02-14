@@ -1,23 +1,22 @@
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 import { Text, View, TouchableOpacity, TouchableOpacityProps, TextInput } from "react-native";
 
 type QuantitySelectProps = TouchableOpacityProps & {
     label: string;
-    initialValue: number;
-    incrAmount: "integer" | "decimal"
+    incrAmount: "integer" | "decimal" | string;
     onChange: (quanity: number) => void;
 }
 
-export function QuantitySelect ({ label, initialValue, incrAmount, onChange, ...rest }: QuantitySelectProps) {
-    const [value, setValue] = useState<number>(initialValue);
+export function QuantitySelect ({ label, incrAmount, onChange, ...rest }: QuantitySelectProps) {
+    const [value, setValue] = useState<number>(1.0);
 
     function increaseQuantity () {
-        const amount = incrAmount === "integer" ? 1 : .1;
+        const amount = incrAmount === "integer" ? 1 : 0.1;
         setValue(value + amount);
     }
 
     function decreaseQuantity () {
-        const amount = incrAmount === "integer" ? 1 : .1;
+        const amount = incrAmount === "integer" ? 1 : 0.1;
         if (value > 1) {
             setValue(value - amount);
         }
@@ -46,7 +45,7 @@ export function QuantitySelect ({ label, initialValue, incrAmount, onChange, ...
                 </TouchableOpacity>
                 <View className="items-center justify-center px-4">
                     <Text className="text-2xl text-slate-400 text-center">
-                        { value }
+                        { incrAmount === "integer" ? value : value.toFixed(2).replace(".", ",") }
                     </Text>
                 </View>
                 <TouchableOpacity

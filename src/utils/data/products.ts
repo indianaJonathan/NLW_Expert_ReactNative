@@ -20,6 +20,7 @@ const MENU = [
           "Cebola;",
           "Molho da casa;",
         ],
+        amountType: "integer"
       },
     ],
   },
@@ -44,6 +45,7 @@ const MENU = [
           "Cebola;",
           "Molho da casa;",
         ],
+        amountType: "integer"
       },
       {
         id: "3",
@@ -63,6 +65,7 @@ const MENU = [
           "Cebola;",
           "Molho da casa;",
         ],
+        amountType: "integer"
       },
       {
         id: "4",
@@ -82,6 +85,7 @@ const MENU = [
           "Cebola;",
           "Molho da casa;",
         ],
+        amountType: "integer"
       },
     ],
   },
@@ -101,6 +105,7 @@ const MENU = [
           "1x Bola de sorvete a sua escolha",
           "Escolha sua calda;",
         ],
+        amountType: "integer"
       },
       {
         id: "6",
@@ -111,6 +116,7 @@ const MENU = [
         cover: require("../../assets/products/cover/6.png"),
         thumbnail: require("../../assets/products/thumbnail/6.png"),
         ingredients: ["Escolha o sabor;", "Chantilly;"],
+        amountType: "integer"
       },
     ],
   },
@@ -126,6 +132,34 @@ const MENU = [
         description:
           "Uma coca super gelada para acompanhar o seu super lanche...",
         ingredients: [],
+        amountType: "integer"
+      },
+    ],
+  },
+  {
+    title: "Comlementos",
+    data: [
+      {
+        id: "8",
+        title: "Sachê de maionese",
+        price: 0.15,
+        thumbnail: require("../../assets/products/thumbnail/7.png"),
+        cover: require("../../assets/products/cover/7.png"),
+        description:
+          "Besunta essa desgraça",
+        ingredients: [],
+        amountType: "decimal"
+      },
+      {
+        id: "9",
+        title: "Sachê de mostarda",
+        price: 0.15,
+        thumbnail: require("../../assets/products/thumbnail/7.png"),
+        cover: require("../../assets/products/cover/7.png"),
+        description:
+          "Besunta essa desgraça mais ainda",
+        ingredients: [],
+        amountType: "decimal"
       },
     ],
   },

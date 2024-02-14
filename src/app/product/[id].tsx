@@ -67,7 +67,7 @@ export default function Product () {
                         {"\u2022"} { ingredient }
                     </Text>
                 )) }
-                <QuantitySelect label="Quantidade:" initialValue={1} incrAmount="integer" onChange={handleQuantityChange}/>
+                <QuantitySelect label="Quantidade:" incrAmount={product.amountType} onChange={handleQuantityChange}/>
             </View>
             <View className="p-5 pb-8 gap-5">
                 <Button onPress={handleAddToCart}>

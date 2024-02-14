@@ -22,7 +22,7 @@ export default function Cart() {
     const navigation = useNavigation();
 
     const [address, setAddress] = useState("");
-    const total = formatCurrency(cartStore.products.reduce((total, product) => total + product.price * product.quantity, 0));
+    const total = formatCurrency(cartStore.products.reduce((total, product) => total + product.price * (product.quantity ? product.quantity : 0), 0));
 
     function handleProductRemove(product: ProductCartProps) {
         Alert.alert("Remover produto", `Deseja remover ${product.title} do carrinho?`, [
@@ -41,14 +41,9 @@ export default function Cart() {
             return Alert.alert("Pedido", "Informe o endereço de entrega");
         }
 
-        const products = cartStore.products.map((product) => `\n ${product.quantity} ${product.title}`).join("");
+        const products = cartStore.products.map((product) => `\n ${product.amountType === "integer" ? product.quantity : product.quantity?.toFixed(2)} ${product.title}`).join("");
 
-        const message = `
-            🍔🍔 NOVO PEDIDO 🍔🍔
-            \n 🏍️ Entregar em: ${address.toLocaleUpperCase()}
-            ${products}
-            \n 💵 **Valor total:** ${total}
-        `
+        const message = `🍔🍔 _*NOVO PEDIDO*_ 🍔🍔\n\n🏍️ *Entregar em:* ${address.toLocaleUpperCase()}\n${products}\n\n 💵 *Valor total:* ${total}`
 
         Linking.openURL(`http://api.whatsapp.com/send?phone=${PHONE_NUMBER}&text=${message}`)
 
@@ -58,7 +53,7 @@ export default function Cart() {
 
     return (
         <View className="flex-1 pt-8 mb-8">
-            <Header title="Seu carrinho" />
+            <Header title="Seu carrinho" icon="shopping-cart" />
             <KeyboardAwareScrollView>
                 <ScrollView>
                     <View className="p-5 flex-1">
